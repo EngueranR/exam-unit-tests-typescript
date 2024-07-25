@@ -31,4 +31,16 @@ describe("submitOrder", () => {
     expect(() => submitOrder(order)).toThrow("La commande a déjà été soumise.");
     expect(sendOrderEmail).not.toHaveBeenCalled();
   });
+
+  it("Retourne une erreur si la commande n'a pas d'identifiant", () => {
+    const order: Order = {
+      id: "",
+      isSubmitted: false,
+    };
+
+    expect(() => submitOrder(order)).toThrow(
+      "L'identifiant de la commande est requis."
+    );
+    expect(sendOrderEmail).not.toHaveBeenCalled();
+  });
 });
